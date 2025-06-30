@@ -3,7 +3,7 @@ const csv = require("csv-parser");
 const fs = require("fs");
 
 // Helper function for deleting files
-function deleteFile(filePath) {
+function deleteTempFile(filePath) {
   fs.unlink(filePath, (unlinkErr) => {
     if (unlinkErr) {
       console.error(`Error deleting temp file ${filePath}:`, unlinkErr);
@@ -137,7 +137,7 @@ const upload = async (req, res) => {
     res.status(500).send("Error processing file.");
   } finally {
     // Siempre intenta eliminar el archivo temporal, independientemente del éxito o fracaso.
-    deleteFile(filePath);
+    deleteTempFile(filePath);
   }
 };
 
